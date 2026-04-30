@@ -5,11 +5,6 @@ function App() {
   return (
     <>
       <BookList libri={Scifi} />
-      {/* <SingleBook
-        title={Scifi[0].title}
-        img={Scifi[0].img}
-        price={Scifi[0].price}
-      /> */}
     </>
   );
 }
