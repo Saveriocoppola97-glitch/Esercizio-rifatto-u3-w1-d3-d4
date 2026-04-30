@@ -6,6 +6,7 @@ class BookList extends Component {
   state = {
     search: "",
   };
+
   render() {
     return (
       <Container>
@@ -15,34 +16,28 @@ class BookList extends Component {
               type="text"
               placeholder="Cerca un libro"
               value={this.state.search}
-              onChange={(e) => {
-                this.setState({
-                  search: e.target.value,
-                });
-              }}
+              onChange={(e) => this.setState({ search: e.target.value })}
             />
           </Col>
         </Row>
+
         <Row className="row-cols-1 row-cols-md-2 row-cols-lg-4">
           {this.props.libri
-            .filter((Sbook) => {
-              if (Sbook.title.includes(this.state.search)) {
-                return true;
-              } else {
-                return false;
-              }
-            })
-            .map((Sbook) => {
-              return (
-                <Col key={Sbook.asin}>
-                  <SingleBook
-                    img={Sbook.img}
-                    title={Sbook.title}
-                    price={Sbook.price}
-                  />
-                </Col>
-              );
-            })}
+            .filter((Sbook) =>
+              Sbook.title
+                .toLowerCase()
+                .includes(this.state.search.toLowerCase()),
+            )
+            .map((Sbook) => (
+              <Col key={Sbook.asin}>
+                <SingleBook
+                  img={Sbook.img}
+                  title={Sbook.title}
+                  price={Sbook.price}
+                  asin={Sbook.asin}
+                />
+              </Col>
+            ))}
         </Row>
       </Container>
     );
